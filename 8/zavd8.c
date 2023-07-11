@@ -19,25 +19,38 @@ int main() {
     scanf("%s", word);
 
     int len = strlen(word);
+    int uppercaseCount = 0;
+    int lowercaseCount = 0;
 
-    // Рахуємо кількість входжень кожної букви (нижній та верхній регістр)
+    // Рахуємо кількість входжень кожної букви з відповідним регістром
     for(int i = 0; i < len; i++) {
-        char lowercase = tolower(word[i]);
-        count[lowercase-'a']++;
+        if(isupper(word[i])) {
+            count[word[i]-'A']++;
+            uppercaseCount++;
+        } else if(islower(word[i])) {
+            count[word[i]-'a']++;
+            lowercaseCount++;
+        }
     }
 
     // Обчислюємо факторіал довжини слова
     long long fact_len = factorial(len);
 
-    // Обчислюємо добуток факторіалів
+    // Обчислюємо добуток факторіалів кількостей входжень
     for(int i = 0; i < 26; i++) {
         if(count[i] > 1) {
             fact_len /= factorial(count[i]);
         }
     }
 
-    // Виводимо результат
-    printf("Кількість анаграм: %lld\n", fact_len);
+    // Враховуємо регістр при виведенні результату
+    long long anagramCount = fact_len;
+
+    if (uppercaseCount > 0 && lowercaseCount > 0) {
+        anagramCount *= 2;  // Множимо на 2, якщо враховуються обидва регістри
+    }
+
+    printf("Кількість анаграм: %lld\n", anagramCount);
 
     return 0;
 }
