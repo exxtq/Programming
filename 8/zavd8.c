@@ -29,7 +29,7 @@ int main() {
     // Обчислюємо факторіал довжини слова
     long long fact_len = factorial(len);
 
-    // Обчислюємо добуток факторіалів кількостей входжень
+    // Обчислюємо добуток факторіалів
     for(int i = 0; i < 26; i++) {
         if(count[i] > 1) {
             fact_len /= factorial(count[i]);
