@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
 // Функція для обчислення факторіалу
 long long factorial(int n) {
@@ -19,9 +20,10 @@ int main() {
 
     int len = strlen(word);
 
-    // Рахуємо кількість входжень кожної букви
+    // Рахуємо кількість входжень кожної букви (нижній та верхній регістр)
     for(int i = 0; i < len; i++) {
-        count[word[i]-'a']++;
+        char lowercase = tolower(word[i]);
+        count[lowercase-'a']++;
     }
 
     // Обчислюємо факторіал довжини слова
